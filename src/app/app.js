@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component } from "react";
+import React from "react";
 import { Header } from "./Componentes/Header/indexH";
 import { ListaProductos } from "./Componentes/Productos/indexP";
 import "boxicons";
@@ -12,28 +12,25 @@ import { ListaVentas } from "./Componentes/Ventas/indexV";
 import { Profile } from "./Componentes/Login/Profile";
 import { Formulario } from "./Componentes/Productos/Formulario";
 
-// function App() {
-class App extends Component {
-  render() {
-    return (
-      <DataProvider>
-        <div className="App">
-          <Router>
-            <Header />
-            <Carrito />
-            <Routes>
-              <Route path="/" element={<Inicio />} />
-              <Route path="/Productos" element={<ListaProductos />} />
-              <Route path="/Productos/${id}" element={<ProductoDetalles />} />
-              <Route path="/Ventas" element={<ListaVentas />} />
-              <Route path="/Profile" element={<Profile />} />
-              <Route path="/AddProducts" element={<Formulario />} />
-            </Routes>
-          </Router>
-        </div>
-      </DataProvider>
-    );
-  }
+function App() {
+  return (
+    <DataProvider>
+      <div className="App">
+        <Router>
+          <Header />
+          <Carrito />
+          <Routes>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/Productos" element={<ListaProductos />} />
+            <Route path="/Productos/${id}" element={<ProductoDetalles />} />
+            <Route path="/Ventas" element={<ListaVentas />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/AddProducts" element={<Formulario />} />
+          </Routes>
+        </Router>
+      </div>
+    </DataProvider>
+  );
 }
 
 export default App;

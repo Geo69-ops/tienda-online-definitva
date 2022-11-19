@@ -24,7 +24,7 @@ export const Header = () => {
     <header>
       <Link to="/">
         <div className="logo">
-          <img src="${helloWorld}" alt="logo" width="150" />
+          <img src={helloWorld} alt="logo" width="150" />
         </div>
       </Link>
       <ul>

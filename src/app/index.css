@@ -477,9 +477,6 @@ header .cart span {
   font-size: 2rem;
 }
 
-.carrito.show{
-  visibility: visible;
-}
 
 .carrito.show{
   transform: translate(-50%,-50%)
