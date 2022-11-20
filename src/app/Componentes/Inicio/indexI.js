@@ -9,7 +9,7 @@ export const Inicio = () => {
       <Link to="/">
         <h1 className="title">Inicio</h1>
       </Link>
-      <img src="${portada}" alt="inicio" width="1450" />
+      <img src={portada} alt="inicio" width="1450" />
     </div>
   );
 };

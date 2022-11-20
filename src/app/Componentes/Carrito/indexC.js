@@ -69,7 +69,7 @@ export const Carrito = () => {
               }}
             >
               {" "}
-              Carrito vacío{" "}
+              Carrito vacio{" "}
             </h2>
           ) : (
             <>

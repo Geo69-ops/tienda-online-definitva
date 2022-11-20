@@ -21,7 +21,7 @@ export const Header = () => {
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
-    <header>
+    <>
       <Link to="/">
         <div className="logo">
           <img src={helloWorld} alt="logo" width="150" />
@@ -74,6 +74,6 @@ export const Header = () => {
         <box-icon name="cart"></box-icon>
         <span className="item__total">{carrito.length}</span>
       </div>
-    </header>
+    </>
   );
 };
