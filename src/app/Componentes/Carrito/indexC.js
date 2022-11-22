@@ -18,7 +18,8 @@ export const Carrito = () => {
     carrito.forEach((item) => {
       if (item.id === id) {
         item.cantidad === 1 ? (item.cantidad = 1) : (item.cantidad -= 1);
-        item.stock += 1;
+
+        item.stock <= x ? item.stock === x : (item.stock += 1);
       }
       setCarrito([...carrito]);
     });
@@ -28,8 +29,8 @@ export const Carrito = () => {
     carrito.forEach((item) => {
       if (item.id === id) {
         item.cantidad += 1;
-        item.stock -= 1;
-        console.log(item.cantidad);
+
+        item.stock <= x ? item.stock === x : (item.stock -= 1);
       }
       setCarrito([...carrito]);
     });

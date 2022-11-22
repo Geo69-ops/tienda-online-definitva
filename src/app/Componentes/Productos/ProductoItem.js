@@ -5,18 +5,21 @@ import { DataContext } from "../../context/Dataprovider";
 export const ProductoItem = ({ id, title, price, categoria, stock, image }) => {
   const value = useContext(DataContext);
   const addCarrito = value.addCarrito;
-  const productos = value.productos;
+  const [productos, setProductos] = value.productos;
 
+  const stockk = parseInt(stock);
+  console.log("Hola desde el parse del stock");
+  console.log(stockk);
+  console.log(stock);
   return (
     <div className="producto">
-      <Link to={`/producto/${id}`}>
-        <br />
-        <div className="producto__img">
-          <img src={image} alt={title} width="150" />
-          <div>Stock (Kg)</div>
-          <span className="span">{stock + 1}</span>
-        </div>
-      </Link>
+      <br />
+      <div className="producto__img">
+        {/* <img src={image} alt={title} width="150" /> */}
+        <div>Stock (Kg)</div>
+        <span className="span">{stock}</span>
+      </div>
+
       <div className="producto__footer">
         <h1> {title} </h1>
         <p> {categoria} </p>
@@ -28,9 +31,7 @@ export const ProductoItem = ({ id, title, price, categoria, stock, image }) => {
           Añadir al carrito
         </button>
         <div>
-          <Link to={`/Productos/${id}`} className="btn">
-            vista
-          </Link>
+          <button className="btn">vista</button>
         </div>
       </div>
     </div>

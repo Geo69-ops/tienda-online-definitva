@@ -11,20 +11,21 @@ export const ListaProductos = () => {
   const [addProduct, setAddProduct] = value.addProduct;
   const { isAuthenticated } = useAuth0();
 
-  // const toogleAddProducto1 = () => {
-  //   setAddProduct(true);
-  // };
-  // const toogleAddProducto2 = () => {
-  //   setAddProduct(false);
-  // };
+  const toogleAddProducto1 = () => {
+    setAddProduct(true);
+  };
+  const toogleAddProducto2 = () => {
+    setAddProduct(false);
+  };
 
-  // {
-  //   isAuthenticated ? toogleAddProducto1() : toogleAddProducto2();
-  // }
+  {
+    isAuthenticated ? toogleAddProducto1() : toogleAddProducto2();
+  }
 
   // const show11 = addProduct ? "add" : "add show";
   // console.log(isAuthenticated);
   // console.log(show11);
+
   return (
     <>
       <h1 className="title"> PRODUCTOS </h1>
@@ -39,9 +40,9 @@ export const ListaProductos = () => {
             key={producto.id}
             id={producto.id}
             title={producto.title}
-            price={producto.price}
+            price={parseInt(producto.price)}
             categoria={producto.categoria}
-            stock={producto.stock}
+            stock={parseInt(producto.stock)}
             image={producto.image}
           />
         ))}

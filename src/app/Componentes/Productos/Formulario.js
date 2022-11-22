@@ -1,9 +1,109 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../../context/Dataprovider";
+// const Productos = require("../models/productos.model");
+import DataTable from "react-data-table-component";
+import { model } from "mongoose";
 
+const columnas = [
+  { name: "id", selector: "_id", sortable: true },
+  { name: "title", selector: "title", sortable: true },
+  { name: "price", selector: "price", sortable: true },
+  { name: "image", selector: "image", sortable: true },
+  { name: "category", selector: "category", sortable: true },
+  { name: "stock", selector: "stock", sortable: true },
+  { name: "cantidad", selector: "cantidad", sortable: true },
+  { name: "__v", selector: "__v", sortable: true },
+];
+
+// const tabla = [
+//   {
+//     _id: 1,
+//     title: "yuca",
+//     image: "jkss",
+//     category: "verdura",
+//     price: 3543,
+//     stock: 4223,
+//     cantidad: 1,
+//     __v: 0,
+//   },
+//   {
+//     _id: 2,
+//     title: "papa",
+//     image: "jajdj",
+//     price: 3543,
+//     category: "verdura",
+//     stock: 4223,
+//     cantidad: 1,
+//     __v: 0,
+//   },
+// ];
 export const Formulario = () => {
   const value = useContext(DataContext);
+
   const [productos, setProductos] = value.productos;
+  // const tabla = productos;
+  // console.log("Aqui van los productos");
+  // console.log(productos);
+  // console.log(tabla);
+
+  const tabla = productos;
+
+  const borrar = () => {
+    document.getElementById("1").value = "";
+    document.getElementById("2").value = "";
+    document.getElementById("3").value = "";
+    document.getElementById("4").value = "";
+  };
+
+  const borrar2 = () => {
+    document.getElementById("8").value = "";
+    document.getElementById("9").value = "";
+    document.getElementById("10").value = "";
+    document.getElementById("11").value = "";
+  };
+  // console.log("Aqui van otra vezzz los productos");
+  // console.log(productos);
+  // console.log(tabla);
+  const editarProducto = async () => {
+    const idEdit = document.getElementById("6").value;
+    console.log(idEdit);
+
+    const url = `http://localhost:4000/api/buscar/${idEdit}`;
+    const parameters = {
+      method: "GET",
+      mode: "no-cors",
+    };
+
+    const response = await fetch(url, parameters);
+    const daata = await response.json();
+    const producto = daata.modelo;
+    console.log(producto);
+    console.log(daata);
+    const prod = producto.title;
+    const prec = producto.price;
+    const stoc = producto.stock;
+    const clas = producto.category;
+    // const imag = producto.image;
+
+    document.getElementById("8").value = prod;
+    document.getElementById("9").value = prec;
+    document.getElementById("10").value = stoc;
+    document.getElementById("11").value = clas;
+    // window.scrollToDown();
+    // document.getElementById("5").value = img;
+
+    // console.log(response);
+    // console.log("Hola desde showDB");
+    // console.log(daata.model);
+
+    // console.log("hola desde el useEffect de GET");
+
+    // console.log("va el get de productos");
+    // console.log(productos);
+
+    // .then((response) => response.json())
+    // .then((data) => console.log(data));
+  };
 
   const addproducto = () => {
     // const check = productos.every((item) => {
@@ -67,36 +167,137 @@ export const Formulario = () => {
   return (
     <div className="productos">
       <h1 className="title"> Formulario de ingreso de productos </h1>
-      {/* <form> */}
-      <div>
-        <label className="label">Producto</label>
-        <input id="1" className="in" type="text" required autoFocus />
-      </div>
+      <form>
+        <div>
+          <label className="label">Producto</label>
+          <input id="1" className="in" type="text" required autoFocus />
+        </div>
+
+        <div>
+          <label className="label">Precio</label>
+          <input id="2" className="in" type="text" required />
+        </div>
+        <div>
+          <label className="label">|Stock|</label>
+          <input id="3" className="in" type="text" required />
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+          <label className="label">Clasificación</label>
+          <input id="4" className="in" type="text" required />
+
+          {/* <select id="4" className="in">
+            <option value="1"> Verdura</option>
+            <option value="2"> Fruta</option>
+          </select> */}
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+          <label className="label">Imagen</label>
+          <input id="5" className="in" type="file" required />
+        </div>
+
+        <br />
+        <br />
+
+        <button className="btn" onClick={addproducto}>
+          Enviar
+        </button>
+        <button className="btn" onClick={borrar}>
+          Cancelar
+        </button>
+      </form>
+      <hr />
+      <hr />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
       <div>
-        <label className="label">Precio</label>
-        <input id="2" className="in" type="text" required />
-      </div>
-      <div>
-        <label className="label">|Stock|</label>
-        <input id="3" className="in" type="text" required />
-      </div>
-      <div>
-        <label className="label">Clasificación</label>
-        <select id="4" className="in">
-          <option value="1"> Verdura</option>
-          <option value="2"> Fruta</option>
-        </select>
-      </div>
-      <div>
-        <label className="label">Imagen</label>
-        <input id="5" className="in" type="file" required />
+        <h2 className="label">Editar por id</h2>
+        <input id="6" className="in" type="text" required />
+        <button className="btn" onClick={editarProducto}>
+          Buscar ID para actualizar
+        </button>
       </div>
 
-      <button className="btn" onClick={addproducto}>
-        Enviar
-      </button>
-      {/* </form> */}
+      <br />
+      <form>
+        <div>
+          <label className="label">Nombre del producto</label>
+          <input id="8" className="in" type="text" required autoFocus />
+        </div>
+
+        <div>
+          <label className="label">Precio del producto</label>
+          <input id="9" className="in" type="text" required />
+        </div>
+        <div>
+          <label className="label">|Stock en venta|</label>
+          <input id="10" className="in" type="text" required />
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+          <label className="label">Clasificación del producto</label>
+          <input id="11" className="in" type="text" required />
+
+          {/* <select id="4" className="in">
+            <option value="1"> Verdura</option>
+            <option value="2"> Fruta</option>
+          </select> */}
+        </div>
+
+        <br />
+        <br />
+
+        <div>
+          <label className="label">Imagen</label>
+          <input id="5" className="in" type="file" required />
+        </div>
+
+        <br />
+        <br />
+
+        <button className="btn" onClick={editarProducto}>
+          Editar el producto
+        </button>
+        <button className="btn" onClick={borrar2}>
+          Cancelar
+        </button>
+      </form>
+
+      <br />
+      <br />
+      <br />
+
+      <div>
+        <h2 className="label">Eliminar por id</h2>
+        <input id="7" className="in" type="text" required />
+        <button className="btn" color="red">
+          Eliminar{" "}
+        </button>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div className="tabla"></div>
+      <div>
+        <DataTable columns={columnas} data={tabla} title="Productos" />
+      </div>
     </div>
   );
 };

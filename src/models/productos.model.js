@@ -9,7 +9,7 @@ const productosSchema = new Schema({
     unique: true,
   },
   price: {
-    type: Decimal128,
+    type: Number,
     require: [true, "Precio del producto es obligatorio"],
   },
   image: {
@@ -21,10 +21,10 @@ const productosSchema = new Schema({
     require: [true, "Categoria del producto es obligatorio"],
   },
   stock: {
-    type: Decimal128,
+    type: Number,
     require: [true, "Stock del producto es obligatorio"],
   },
-  cantidad: { type: Decimal128, require: [false] },
+  cantidad: { type: Number, require: [false] },
 });
 
 // const frutasModel = mongoose.model("Frutas", productosSchema);

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, createContext } from "react";
-// import Data from "../Data.js";
+import Data from "../../Data.js";
 // import DataVenta from "../DataVenta.js";
 import { useAuth0 } from "@auth0/auth0-react";
 // import { empty } from "@apollo/client";
+var x = "";
 export const DataContext = createContext();
 let Fecha = new Date();
 
@@ -79,7 +80,7 @@ export const DataProvider = (props) => {
       const agregar = carrito.map((item2) => {
         return item2;
       });
-      console.log(agregar);
+      // console.log(agregar);
       //
       // verificar numero de ID
       const Uid = ventas.map((venta) => {
@@ -136,6 +137,40 @@ export const DataProvider = (props) => {
   //   }
   // }, []);
 
+  useEffect(() => {
+    const url = "http://localhost:4000/api/Productos";
+    const parameters = {
+      method: "GET",
+      mode: "no-cors",
+    };
+
+    const showDB = async () => {
+      const response = await fetch(url, parameters);
+      const daata = await response.json();
+      const producto = daata.model;
+      if (producto) {
+        setProductos(producto);
+      } else {
+        setProductos([]);
+      }
+      // console.log(response);
+      // console.log("Hola desde showDB");
+      // console.log(daata.model);
+
+      // console.log("hola desde el useEffect de GET");
+
+      // console.log("va el get de productos");
+      // console.log(productos);
+
+      // .then((response) => response.json())
+      // .then((data) => console.log(data));
+    };
+
+    showDB();
+  }, []);
+
+  // console.log(productos);
+
   // const addProductos = (title) => {
   //   const check2 = productos.every((item) => {
   //     return item.title !== title;
@@ -191,7 +226,7 @@ export const DataProvider = (props) => {
     carrito: [carrito, setCarrito],
     total: [total, setTotal],
     ventas: [ventas],
-    modal: [modal, setModal],
+    // modal: [modal, setModal],
     addProduct: [addProduct, setAddProduct],
     AddVentas: AddVentas,
     removeProducto: removeProducto,

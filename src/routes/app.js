@@ -6,7 +6,7 @@ const app = express.Router();
 app.get("/Productos", CroutesProductos.listarProductos);
 
 //buscar un prodcuto por nombre
-app.get("/buscar/:title", CroutesProductos.buscar);
+app.get("/buscar/:id", CroutesProductos.buscar);
 
 //Agregar
 app.post("/addProductos", CroutesProductos.addProductos);

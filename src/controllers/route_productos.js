@@ -6,8 +6,11 @@ const Productos = require("../models/productos.model");
 const pool = require("../settings/db");
 
 let buscar = async (req, res) => {
-  const producto = await Productos.findOne(req.params.title);
-  res.json(producto);
+  const modelo = await Productos.findById(req.params.id);
+  res.json({
+    status: 200,
+    modelo,
+  });
 };
 
 let listarProductos = async (req, res) => {

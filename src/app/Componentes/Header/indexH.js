@@ -12,17 +12,87 @@ export const Header = () => {
   const [menu, setMenu] = value.menu;
   const [carrito] = value.carrito;
 
-  const toogleMenu = () => {
-    setMenu(!menu);
-  };
+  // const toogleMenu = () => {
+  //   setMenu(!menu);
+  // };
   const { user } = useAuth0();
   const { isAuthenticated, isLoading } = useAuth0();
+  console.log(carrito.lenght);
 
   if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div id="header">
-      <Link to="/">
+      <div>
+        <nav className="light-blue darken-4">
+          <ul className="header">
+            <li>
+              <Link to="/">
+                <div className="logo">
+                  <img src={helloWorld} alt="logo" width="100" />
+                </div>
+              </Link>
+            </li>
+
+            {isAuthenticated ? (
+              <li>
+                <img src={user.picture} width="50" />
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            {isAuthenticated ? (
+              <li>
+                <LogoutButton />
+              </li>
+            ) : (
+              <li>
+                <LoginButton />
+              </li>
+            )}
+
+            {isAuthenticated ? (
+              <li>
+                <Link to="/Profile"> PERFIL </Link>
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            {isAuthenticated ? (
+              <li>
+                <Link to="/Ventas"> VENTAS </Link>
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            {isAuthenticated ? (
+              <li>
+                <Link to="/AddProducts"> Añadir productos </Link>
+              </li>
+            ) : (
+              <li></li>
+            )}
+
+            <li>
+              <Link to="/Productos"> PRODUCTOS </Link>
+            </li>
+
+            <div className="cart">
+              <box-icon name="cart"></box-icon>
+              <span className="item__total">{carrito}</span>
+            </div>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+};
+
+{
+  /* <Link to="/">
         <div className="logo">
           <img src={helloWorld} alt="logo" width="150" />
         </div>
@@ -70,10 +140,8 @@ export const Header = () => {
         </ul>
       </ul>
 
-      <div className="cart" onClick={toogleMenu}>
+      <div className="cart">
         <box-icon name="cart"></box-icon>
-        <span className="item__total">{carrito.length}</span>
-      </div>
-    </div>
-  );
-};
+        <span className="item__total">CARRITO . LENGHT</span>
+      </div> */
+}
